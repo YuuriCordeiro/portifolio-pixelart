@@ -28,7 +28,7 @@ const TypingText: React.FC<TypingTextProps> = ({ text, speed = 50 }) => {
   }, [text, speed]);
 
   return (
-    <p className="text-black text-xl font-normal leading-8 ml-2.5 mt-6 max-md:text-base max-md:max-w-full">
+    <p className="text-black text-xl font-normal leading-8 mt-6 text-center max-md:text-base max-md:max-w-full mx-auto">
       {displayedText}
       <span className={`ml-1 ${cursorVisible ? 'opacity-100' : 'opacity-0'}`}>|</span>
     </p>
@@ -76,45 +76,33 @@ export const ContactSection: React.FC = () => {
   }, []);
 
   return (
-    <section ref={sectionRef} id="contato" className="mt-[89px] max-md:max-w-full max-md:mt-10">
-      <div className="gap-5 flex max-md:flex-col max-md:items-stretch">
-        <div className="flex w-full gap-5 max-md:flex-col max-md:gap-5">
-          <article className="bg-[rgba(234,216,140,1)] rounded-[20px] drop-shadow-[4px_4px_0_rgba(0,0,0,1)] flex flex-col justify-between w-[67%] max-md:w-full mx-auto px-[35px] py-[45px] border-[rgba(213,167,54,1)] border-solid border-[10px] max-md:px-5">
-            <h2 className="text-[rgba(3,4,1,1)] text-xl font-heading leading-none max-md:text-lg max-md:max-w-full">
-              Convite do Explorador
-            </h2>
-            {startTyping && (
-              <TypingText text="Seempre pronto para novas aventuras! Se você quer trocar ideias, criar projetos ou compartilhar conhecimentos, vamos nos conectar." />
-            )}
+    <section ref={sectionRef} id="contato" className="mt-[89px] max-md:max-w-full max-md:mt-10 flex justify-center">
+      <article className="bg-[rgba(234,216,140,1)] rounded-[20px] drop-shadow-[4px_4px_0_rgba(0,0,0,1)] flex flex-col justify-between w-[67%] max-md:w-full px-[35px] py-[45px] border-[rgba(213,167,54,1)] border-solid border-[10px] text-center">
+        <h2 className="text-[rgba(3,4,1,1)] text-xl font-heading leading-none max-md:text-base max-md:leading-snug max-md:max-w-full">
+  Convite do Explorador
+</h2>
+        {startTyping && (
+          <TypingText text="Seempre pronto para novas aventuras! Se você quer trocar ideias, criar projetos ou compartilhar conhecimentos, vamos nos conectar." />
+        )}
 
-            <div className="self-center flex w-[391px] max-w-full items-stretch gap-5 justify-between mt-10 max-md:mt-6">
-              {socialLinks.map((link, index) => (
-                <a
-                  key={index}
-                  href={link.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="hover:scale-110 transition-transform"
-                >
-                  <img
-                    src={link.src}
-                    alt={link.alt}
-                    className="aspect-[1] object-contain w-[60px] shrink-0 drop-shadow-[4px_4px_0_rgba(0,0,0,1)]"
-                  />
-                </a>
-              ))}
-            </div>
-          </article>
-
-          <div className="w-[33%] max-md:w-full max-md:mt-5 flex">
-            <img
-              src="https://api.builder.io/api/v1/image/assets/3451d94033364897b1822b0a13d108ce/1a2762651634022697f38454608bada0f2c5e572?placeholderIfAbsent=true"
-              alt="Contact illustration"
-              className="w-full object-cover h-full drop-shadow-[4px_4px_0_rgba(0,0,0,1)] max-md:rounded-[20px]"
-            />
-          </div>
+        <div className="flex w-full max-w-[391px] mx-auto items-center gap-5 justify-center mt-10 max-md:mt-6">
+          {socialLinks.map((link, index) => (
+            <a
+              key={index}
+              href={link.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:scale-110 transition-transform"
+            >
+              <img
+                src={link.src}
+                alt={link.alt}
+                className="aspect-[1] object-contain w-[60px] shrink-0 drop-shadow-[4px_4px_0_rgba(0,0,0,1)]"
+              />
+            </a>
+          ))}
         </div>
-      </div>
+      </article>
     </section>
   );
 };
