@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { SkillCard } from './SkillCard';
 
 export const SkillsSection: React.FC = () => {
-  const [activeTab, setActiveTab] = useState<'sword' | 'book' | 'shield' | 'chest'>('sword');
+  const [activeTab, setActiveTab] = useState<'sword' | 'book' | 'shield' | 'chest'>('chest'); // chest selecionado por padrão
 
   const tabs = [
     { id: 'chest', label: 'Baú', icon: "/imagens/bau.png" },
