@@ -59,34 +59,37 @@ export const SkillsSection: React.FC = () => {
   return (
     <section id="skills" className="flex flex-col items-stretch mt-16 md:mt-20 lg:mt-24">
       {/* Abas */}
-      <div className="flex gap-5 mb-6 justify-center flex-wrap">
+      <div className="flex gap-3 mb-6 justify-center flex-wrap sm:flex-nowrap">
         {tabs.map(tab => (
           <div
             key={tab.id}
             onClick={() => setActiveTab(tab.id as any)}
             className={`
-              flex items-center justify-center cursor-pointer p-3 border-4 transition-transform hover:scale-105 rounded-xl
+              flex items-center justify-center cursor-pointer p-2 sm:p-3 border-4 transition-transform hover:scale-105 rounded-xl
               border-[#D5A736] drop-shadow-[4px_4px_0_rgba(0,0,0,1)]
               ${activeTab === tab.id ? 'bg-[#D5C273]' : 'bg-[#EAD88C]'}
+              w-14 h-14 sm:w-20 sm:h-20
             `}
           >
-            <img src={tab.icon} alt={tab.label} className="w-16 h-16 object-contain" />
+            <img src={tab.icon} alt={tab.label} className="w-10 h-10 sm:w-16 sm:h-16 object-contain" />
           </div>
         ))}
       </div>
 
       {/* Conteúdo da aba */}
-      <div className="bg-[#EAD88C] border-8 border-solid border-[#D5A736] p-8 flex flex-col gap-5 rounded-2xl drop-shadow-[4px_4px_0_rgba(0,0,0,1)]">
+      <div className="bg-[#EAD88C] border-8 border-solid border-[#D5A736] p-6 sm:p-8 flex flex-col gap-5 rounded-2xl drop-shadow-[4px_4px_0_rgba(0,0,0,1)]">
         {activeTab !== 'chest' && (
           <>
             <header className="flex flex-col gap-2">
-              <h2 className="text-2xl font-heading font-press">{currentContent.headerTitle}</h2>
+              <h2 className="text-sm sm:text-base md:text-lg font-openSans font-bold">{currentContent.headerTitle}</h2>
               {'headerSubtitle' in currentContent && currentContent.headerSubtitle && (
-                <p className="font-heading font-press m-0">{currentContent.headerSubtitle}</p>
+                <p className="text-xs sm:text-sm md:text-base font-openSans font-semibold m-0">
+                  {currentContent.headerSubtitle}
+                </p>
               )}
             </header>
             {'quote' in currentContent && currentContent.quote && (
-              <blockquote className="text-lg font-openSans m-0">{currentContent.quote}</blockquote>
+              <blockquote className="text-xs sm:text-sm md:text-base font-openSans m-0">{currentContent.quote}</blockquote>
             )}
             <div className="grid grid-cols-2 gap-5 max-md:grid-cols-1 items-stretch">
               {currentContent.skills.map((skill, idx) => (
@@ -104,17 +107,17 @@ export const SkillsSection: React.FC = () => {
 
         {activeTab === 'chest' && (
           <div className="flex flex-col gap-5">
-            <div className="grid grid-cols-1 gap-5 max-md:grid-cols-1 items-stretch">
+            <div className="grid grid-cols-3 gap-3 max-md:grid-cols-1 items-stretch">
               {currentContent.skills.map(skill => (
                 <div
                   key={skill.id}
-                  className="flex items-center gap-3 cursor-pointer p-4 bg-[#D5C273] border-4 border-[#D5A736] hover:scale-105 transition-transform rounded-xl drop-shadow-[4px_4px_0_rgba(0,0,0,1)]"
+                  className="flex items-center gap-3 cursor-pointer p-3 bg-[#D5C273] border-4 border-[#D5A736] hover:scale-105 transition-transform rounded-xl drop-shadow-[4px_4px_0_rgba(0,0,0,1)]"
                   onClick={() => setActiveTab(skill.id as any)}
                 >
-                  <img src={skill.icon} alt={skill.title} className="w-16 h-16 object-contain" />
+                  <img src={skill.icon} alt={skill.title} className="w-10 h-10 sm:w-16 sm:h-16 object-contain" />
                   <div>
-                    <h2 className="font-heading font-press text-xl">{skill.title}</h2>
-                    <p className="font-heading font-press">{skill.subtitle}</p>
+                    <h2 className="text-sm sm:text-base md:text-lg font-openSans font-bold">{skill.title}</h2>
+                    <p className="text-xs sm:text-sm md:text-base font-openSans font-semibold">{skill.subtitle}</p>
                   </div>
                 </div>
               ))}

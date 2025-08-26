@@ -27,8 +27,10 @@ export const SkillCard: React.FC<SkillCardProps> = ({ icon, title, description, 
           className="aspect-[1] object-contain w-[50px] shrink-0"
         />
         <div className="flex flex-col justify-center grow shrink-0 basis-0 w-fit">
-          <h3 className="text-xl font-press leading-[1.6]">{title}</h3>
-          <p className="text-lg font-openSans leading-8 mt-[9px]">{description}</p>
+          <h3 className="text-base sm:text-lg md:text-xl font-press font-bold leading-[1.4]">{title}</h3>
+          <p className="text-sm sm:text-base md:text-lg font-openSans leading-6 sm:leading-7 md:leading-8 mt-2">
+            {description}
+          </p>
         </div>
       </div>
     </div>
