@@ -1,43 +1,9 @@
-import React, { useEffect, useState, useRef } from 'react';
-
-interface TypingTextProps {
-  text: string;
-  speed?: number;
-}
-
-const TypingText: React.FC<TypingTextProps> = ({ text, speed = 50 }) => {
-  const [displayedText, setDisplayedText] = useState('');
-  const [cursorVisible, setCursorVisible] = useState(true);
-
-  useEffect(() => {
-    let index = 0;
-    const typingInterval = setInterval(() => {
-      setDisplayedText(prev => prev + (text[index] ?? ""));
-      index++;
-      if (index >= text.length) clearInterval(typingInterval);
-    }, speed);
-
-    const cursorInterval = setInterval(() => {
-      setCursorVisible(prev => !prev);
-    }, 500);
-
-    return () => {
-      clearInterval(typingInterval);
-      clearInterval(cursorInterval);
-    };
-  }, [text, speed]);
-
-  return (
-    <p className="text-black text-xl font-normal leading-8 mt-6 text-center max-md:text-base max-md:max-w-full mx-auto">
-      {displayedText}
-      <span className={`ml-1 ${cursorVisible ? 'opacity-100' : 'opacity-0'}`}>|</span>
-    </p>
-  );
-};
+import React, { useRef, useState, useEffect } from 'react';
 
 export const ContactSection: React.FC = () => {
   const sectionRef = useRef<HTMLElement | null>(null);
-  const [startTyping, setStartTyping] = useState(false);
+  const [displayedText, setDisplayedText] = useState('');
+  const [hasAnimated, setHasAnimated] = useState(false); // garante que a animação só rode uma vez
 
   const socialLinks = [
     {
@@ -57,35 +23,52 @@ export const ContactSection: React.FC = () => {
     }
   ];
 
+  const dialogueText = `Sempre pronto para novas aventuras! 
+Se você quer trocar ideias, criar projetos ou compartilhar conhecimentos, vamos nos conectar.`;
+
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            setStartTyping(true);
-            observer.disconnect(); // Ativa apenas uma vez
+        entries.forEach((entry) => {
+          if (entry.isIntersecting && !hasAnimated) {
+            setHasAnimated(true);
+
+            let currentIndex = 0;
+            const interval = setInterval(() => {
+              setDisplayedText(dialogueText.slice(0, currentIndex + 1));
+              currentIndex++;
+              if (currentIndex === dialogueText.length) clearInterval(interval);
+            }, 40); // velocidade da digitação
           }
         });
       },
-      { threshold: 0.3 } // Começa quando 30% da seção aparecer
+      { threshold: 0.2 } // 20% do elemento precisa estar visível
     );
 
     if (sectionRef.current) observer.observe(sectionRef.current);
 
-    return () => observer.disconnect();
-  }, []);
+    return () => {
+      if (sectionRef.current) observer.unobserve(sectionRef.current);
+    };
+  }, [dialogueText, hasAnimated]);
 
   return (
-    <section ref={sectionRef} id="contato" className="mt-[89px] max-md:max-w-full max-md:mt-10 flex justify-center">
-      <article className="bg-[rgba(234,216,140,1)] rounded-[20px] drop-shadow-[4px_4px_0_rgba(0,0,0,1)] flex flex-col justify-between w-[67%] max-md:w-full px-[35px] py-[45px] border-[rgba(213,167,54,1)] border-solid border-[10px] text-center">
-        <h2 className="text-[rgba(3,4,1,1)] text-xl font-heading leading-none max-md:text-base max-md:leading-snug max-md:max-w-full">
-  Convite do Explorador
-</h2>
-        {startTyping && (
-          <TypingText text="Seempre pronto para novas aventuras! Se você quer trocar ideias, criar projetos ou compartilhar conhecimentos, vamos nos conectar." />
-        )}
+    <section
+      ref={sectionRef}
+      id="contato"
+      className="flex justify-center mt-24 max-md:mt-10"
+    >
+      <article className="bg-[rgba(234,216,140,1)] rounded-2xl border-4 border-[rgba(213,167,54,1)] flex flex-col justify-between w-full max-w-3xl p-8 text-center
+                          shadow-[4px_4px_0_rgba(0,0,0,1)]">
+        <h2 className="tracking-in-expand-fwd text-[rgba(3,4,1,1)] text-2xl font-heading leading-none max-md:text-xl max-md:leading-snug">
+          Convite do Explorador
+        </h2>
 
-        <div className="flex w-full max-w-[391px] mx-auto items-center gap-5 justify-center mt-10 max-md:mt-6">
+        <p className="text-black text-lg font-normal leading-8 mt-6 max-w-[600px] mx-auto max-md:text-base whitespace-pre-line">
+          {displayedText}
+        </p>
+
+        <div className="flex w-full max-w-[400px] mx-auto items-center gap-5 justify-center mt-10 max-md:mt-6">
           {socialLinks.map((link, index) => (
             <a
               key={index}
@@ -97,7 +80,7 @@ export const ContactSection: React.FC = () => {
               <img
                 src={link.src}
                 alt={link.alt}
-                className="aspect-[1] object-contain w-[60px] shrink-0 drop-shadow-[4px_4px_0_rgba(0,0,0,1)]"
+                className="aspect-square w-14 object-contain drop-shadow-[4px_4px_0_rgba(0,0,0,1)]"
               />
             </a>
           ))}

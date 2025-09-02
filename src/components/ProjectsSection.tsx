@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 
 export const ProjectsSection: React.FC = () => {
   const projectImages = [
@@ -12,8 +12,32 @@ export const ProjectsSection: React.FC = () => {
   ];
 
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
+  const [isTitleVisible, setIsTitleVisible] = useState(false);
 
   const extraBlocks = [1, 2];
+  const titleRef = useRef<HTMLHeadingElement>(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setIsTitleVisible(true);
+            observer.unobserve(entry.target); // dispara apenas uma vez
+          }
+        });
+      },
+      { threshold: 0.5 } // 50% do título visível
+    );
+
+    if (titleRef.current) {
+      observer.observe(titleRef.current);
+    }
+
+    return () => {
+      if (titleRef.current) observer.unobserve(titleRef.current);
+    };
+  }, []);
 
   return (
     <section
@@ -23,7 +47,14 @@ export const ProjectsSection: React.FC = () => {
       <header
         className="bg-[rgba(140,61,44,1)] drop-shadow-[4px_4px_0_rgba(0,0,0,1)] z-10 flex mt-[-34px] flex-col items-stretch text-xl text-[rgba(235,227,172,1)] font-['Press_Start_2P'] whitespace-nowrap text-center leading-none justify-center px-[70px] py-[27px] rounded-[20px] border-[rgba(209,141,114,1)] border-solid border-[5px] max-md:px-5"
       >
-        <h2 className="drop-shadow-[4px_4px_0_rgba(0,0,0,1)]">Projetos</h2>
+        <h2
+          ref={titleRef}
+          className={`drop-shadow-[4px_4px_0_rgba(0,0,0,1)] ${
+            isTitleVisible ? "tracking-in-expand-fwd" : ""
+          }`}
+        >
+          Projetos
+        </h2>
       </header>
 
       <div className="mt-[37px] max-md:max-w-full max-md:mr-0.5">
