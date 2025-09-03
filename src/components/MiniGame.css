@@ -1,0 +1,90 @@
+.dpad-container {
+  position:relative;
+  width: 150px;
+  height: 150px;
+  margin: 20px auto;
+}
+
+/* Botões base */
+.dpad-btn {
+  position: absolute;
+  width: 50px;
+  height: 50px;
+  font-size: 1.5rem;
+  color: #fafafa;
+  border-radius: 10px;
+  border: 2px solid #fafafa;
+  background: #272727;
+  box-shadow: 3px 3px #fafafa;
+  cursor: pointer;
+}
+
+.dpad-btn:active {
+  box-shadow: none;
+  transform: translate(3px, 3px);
+}
+
+/* Posição dos botões */
+.dpad-btn.up { top: 0; left: 50%; transform: translateX(-50%); }
+.dpad-btn.down { bottom: 0; left: 50%; transform: translateX(-50%); }
+.dpad-btn.left { top: 50%; left: 0; transform: translateY(-50%); }
+.dpad-btn.right { top: 50%; right: 0; transform: translateY(-50%); }
+
+/* Diferenciar WASD e setas */
+.dpad-btn.wasd { display: inline-block; }
+.dpad-btn.arrow { display: none; }
+
+/* Mobile e Tablet */
+@media (max-width: 1024px) {
+  .dpad-btn.wasd { display: none; }
+  .dpad-btn.arrow { display: inline-block; }
+  .dpad-container {
+    width: 150px;
+    height: 150px;
+  }
+  .dpad-btn {
+    width: 50px;
+    height: 50px;
+    font-size: 1.2rem;
+  }
+}
+
+
+/* Animação scale-up-center */
+@keyframes scale-up-center {
+  0% {
+    transform: scale(0.5);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/* Caixa de diálogo do mini game */
+.dialog-box {
+  font-family: 'Press Start 2P', cursive;
+  font-size: 12px;
+  text-align: center;
+  color: #1d1d1d;
+  background-color: #fff8dc;
+  border: 2px solid #161616;
+  padding: 12px 20px;
+  width: 80%;              /* desktop/tablet */
+  max-width: 500px;        /* limite para não exagerar */
+  margin: 15px auto 0;
+  animation: scale-up-center 0.5s ease-out forwards;
+  z-index: 5;
+  position: relative;
+  line-height: 1.6;
+}
+
+/* Ajuste para telas pequenas */
+@media (max-width: 600px) {
+  .dialog-box {
+    width: 90%;            /* quase toda a largura do labirinto */
+    font-size: 10px;       /* texto menor pra caber melhor */
+    padding: 10px 12px;
+  }
+}

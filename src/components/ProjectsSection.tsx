@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState } from "react"; 
 
 export const ProjectsSection: React.FC = () => {
   const projectImages = [
@@ -13,41 +13,46 @@ export const ProjectsSection: React.FC = () => {
 
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
   const [isChestOpen, setIsChestOpen] = useState(false);
+  const [isHovered, setIsHovered] = useState(false);
 
   return (
     <section id="projetos" className="flex flex-col items-center mt-20 px-4 sm:px-10">
       {/* Baú + fada */}
       <div className="relative flex flex-col items-center text-center w-full">
-  <div className="flex flex-col items-center gap-6 w-full">
-    {/* Fada + fala */}
-    <div className="flex items-start gap-3 mb-6">
-      <img
-        src="/imagens/fada.png"
-        alt="Fadinha"
-        className="w-14 animate-bounce"
-      />
-      <div
-        className="px-4 py-3 bg-[#eaeaea] dark:bg-[#222] border-4 border-black dark:border-white 
-                   font-['Press_Start_2P'] text-xs text-black dark:text-white 
-                   max-w-[220px] leading-relaxed text-left
-                   drop-shadow-[4px_4px_0_rgba(0,0,0,1)] rounded-sm"
-      >
-        {!isChestOpen
-          ? "HEY, LISTEN! Clique no baú para conferir os projetos."
-          : "Esses são alguns projetos que o Yúri já fez"}
+        <div className="flex flex-col sm:flex-row items-center justify-center gap-6 w-full">
+          {/* Fada + fala */}
+          <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3 mb-6">
+            <img
+              src="/imagens/fada.png"
+              alt="Fadinha"
+              className="w-14 pulsate-float" // animação pulsante + flutuante
+            />
+
+            <div
+              className="px-4 py-3 bg-[#eaeaea] dark:bg-[#222] border-4 border-black dark:border-white 
+                         font-['Press_Start_2P'] text-xs text-black dark:text-white 
+                         max-w-[220px] leading-relaxed text-left
+                         drop-shadow-[4px_4px_0_rgba(0,0,0,1)] rounded-sm"
+            >
+              {!isChestOpen
+                ? "HEY, LISTEN! Clique no baú para conferir os projetos."
+                : "Esses são alguns projetos que o Yúri já fez!"}
+            </div>
+          </div>
+
+          {/* Baú */}
+          <img
+            src={isChestOpen ? "/imagens/bau-aberto.png" : "/imagens/bau-fechado.png"}
+            alt={isChestOpen ? "Baú aberto" : "Baú fechado"}
+            className={`w-56 cursor-pointer transition-transform ${
+              isHovered ? "shake-bottom" : ""
+            }`}
+            onClick={() => setIsChestOpen((prev) => !prev)}
+            onMouseEnter={() => setIsHovered(true)}
+            onMouseLeave={() => setIsHovered(false)}
+          />
+        </div>
       </div>
-    </div>
-
-    {/* Baú */}
-    <img
-      src={isChestOpen ? "/imagens/bau-aberto.png" : "/imagens/bau-fechado.png"}
-      alt={isChestOpen ? "Baú aberto" : "Baú fechado"}
-      className="w-56 cursor-pointer hover:scale-105 transition-transform"
-      onClick={() => setIsChestOpen((prev) => !prev)}
-    />
-  </div>
-</div>
-
 
       {/* Conteúdo revelado só quando o baú abre */}
       {isChestOpen && (
@@ -72,9 +77,7 @@ export const ProjectsSection: React.FC = () => {
             <h2>Projetos</h2>
           </header>
 
-          <div
-            className={`grid grid-cols-1 sm:grid-cols-3 gap-5 mt-5`}
-          >
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-5 mt-5">
             {projectImages.map((src, index) => (
               <div
                 key={index}
