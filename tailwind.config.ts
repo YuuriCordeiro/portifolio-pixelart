@@ -86,7 +86,11 @@ export default {
       fontFamily: {
         heading: ['"Press Start 2P"', 'cursive'],
         body: ['"Open Sans"', 'sans-serif']
-      }
+      },
+      backgroundImage: {
+    'site-bg-light': "url('/imagens/bg.png')",
+    'site-bg-dark': "url('/imagens/bg-dark.png')", // imagem para dark mode
+  },
     }
   },
   plugins: [require("tailwindcss-animate")],

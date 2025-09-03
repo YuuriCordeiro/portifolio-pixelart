@@ -58,13 +58,13 @@ Se você quer trocar ideias, criar projetos ou compartilhar conhecimentos, vamos
       id="contato"
       className="flex justify-center mt-24 max-md:mt-10"
     >
-      <article className="bg-[rgba(234,216,140,1)] rounded-2xl border-4 border-[rgba(213,167,54,1)] flex flex-col justify-between w-full max-w-3xl p-8 text-center
+      <article className="bg-[rgba(234,216,140,1)] rounded-2xl border-4 border-[rgba(213,167,54,1)] dark:border-[#64411D] dark:bg-[#221510] flex flex-col justify-between w-full max-w-3xl p-8 text-center
                           shadow-[4px_4px_0_rgba(0,0,0,1)]">
-        <h2 className="tracking-in-expand-fwd text-[rgba(3,4,1,1)] text-2xl font-heading leading-none max-md:text-xl max-md:leading-snug">
+        <h2 className="tracking-in-expand-fwd text-[rgba(3,4,1,1)] dark:text-[#FFF7F1] text-2xl font-heading leading-none max-md:text-xl max-md:leading-snug">
           Convite do Explorador
         </h2>
 
-        <p className="text-black text-lg font-normal leading-8 mt-6 max-w-[600px] mx-auto max-md:text-base whitespace-pre-line">
+        <p className="text-black dark:text-[#FFF7F1] text-lg font-normal leading-8 mt-6 max-w-[600px] mx-auto max-md:text-base whitespace-pre-line">
           {displayedText}
         </p>
 

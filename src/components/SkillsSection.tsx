@@ -66,8 +66,8 @@ export const SkillsSection: React.FC = () => {
             onClick={() => setActiveTab(tab.id as any)}
             className={`
               flex items-center justify-center cursor-pointer p-2 sm:p-3 border-4 transition-transform hover:scale-105 rounded-xl
-              border-[#D5A736] drop-shadow-[4px_4px_0_rgba(0,0,0,1)]
-              ${activeTab === tab.id ? 'bg-[#D5C273]' : 'bg-[#EAD88C]'}
+              border-[#D5A736] drop-shadow-[4px_4px_0_rgba(0,0,0,1)] dark:border-[#64411D] dark:border-[#64411D] dark:bg-[#221510]
+              ${activeTab === tab.id ? 'bg-[#D5C273] dark:bg-[#221510]' : 'bg-[#EAD88C] dark:bg-[#472D23]'}
               w-14 h-14 sm:w-20 sm:h-20
             `}
           >
@@ -77,7 +77,7 @@ export const SkillsSection: React.FC = () => {
       </div>
 
       {/* Conteúdo da aba */}
-      <div className="bg-[#EAD88C] border-8 border-solid border-[#D5A736] p-6 sm:p-8 flex flex-col gap-5 rounded-2xl drop-shadow-[4px_4px_0_rgba(0,0,0,1)]">
+      <div className="bg-[#EAD88C] border-8 border-solid border-[#D5A736] dark:border-[#64411D] dark:bg-[#221510] p-6 sm:p-8 flex flex-col gap-5 rounded-2xl drop-shadow-[4px_4px_0_rgba(0,0,0,1)]">
         {activeTab !== 'chest' && (
           <>
             <header className="flex flex-col gap-2">
@@ -111,7 +111,7 @@ export const SkillsSection: React.FC = () => {
               {currentContent.skills.map(skill => (
                 <div
                   key={skill.id}
-                  className="flex items-center gap-3 cursor-pointer p-3 bg-[#D5C273] border-4 border-[#D5A736] hover:scale-105 transition-transform rounded-xl drop-shadow-[4px_4px_0_rgba(0,0,0,1)]"
+                  className="flex items-center gap-3 cursor-pointer p-3 bg-[#D5C273] border-4 border-[#D5A736] dark:border-[#64411D] dark:bg-[#221510] hover:scale-105 transition-transform rounded-xl drop-shadow-[4px_4px_0_rgba(0,0,0,1)]"
                   onClick={() => setActiveTab(skill.id as any)}
                 >
                   <img src={skill.icon} alt={skill.title} className="w-10 h-10 sm:w-16 sm:h-16 object-contain" />

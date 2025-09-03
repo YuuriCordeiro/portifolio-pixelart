@@ -1,0 +1,92 @@
+#theme-toggle-button {
+  cursor: pointer;
+  display: inline-block;
+  font-size: 1.5rem;
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 999;
+}
+
+#toggle {
+  display: none;
+}
+
+#container,
+#button,
+#sun,
+#moon,
+#cloud,
+#stars {
+  transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Fundo do toggle */
+#toggle:checked + svg #container {
+  fill: #2b4360;
+}
+
+/* Movimenta o botão suavemente do começo ao fim */
+#button {
+  transform: translateX(0);
+}
+
+#toggle:checked + svg #button {
+  transform: translateX(48px); /* Largura total do retângulo - botão */
+}
+
+/* Sol e Lua */
+#sun {
+  opacity: 1;
+}
+
+#toggle:checked + svg #sun {
+  opacity: 0;
+}
+
+#moon {
+  opacity: 0;
+}
+
+#toggle:checked + svg #moon {
+  opacity: 1;
+}
+
+/* Nuvem visível com Sol */
+#cloud {
+  opacity: 1;
+}
+
+#toggle:checked + svg #cloud {
+  opacity: 0;
+}
+
+/* Estrelas visíveis com Lua */
+#stars {
+  opacity: 0;
+}
+
+#toggle:checked + svg #stars {
+  opacity: 1;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+  #theme-toggle-button {
+    font-size: 1.2rem;
+  }
+
+  #toggle:checked + svg #button {
+    transform: translateX(40px);
+  }
+}
+
+@media (max-width: 480px) {
+  #theme-toggle-button {
+    font-size: 1rem;
+  }
+
+  #toggle:checked + svg #button {
+    transform: translateX(36px);
+  }
+}

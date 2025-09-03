@@ -15,13 +15,11 @@ const Index = () => {
   };
 
   return (
-    <div className="flex flex-col relative min-h-screen overflow-hidden items-center pt-[75px] pb-11 px-20 max-md:px-5">
-      <img
-        src="https://api.builder.io/api/v1/image/assets/3451d94033364897b1822b0a13d108ce/ec812f8c3a6a77955b660e39cd09be378a13e207?placeholderIfAbsent=true"
-        alt="Background"
-        className="absolute h-full w-full object-cover inset-0"
-      />
-
+    <div
+      className="flex flex-col relative min-h-screen overflow-hidden items-center
+                 pt-[75px] pb-11 px-20 max-md:px-5
+                 bg-site-bg-light dark:bg-site-bg-dark bg-cover bg-center"
+    >
       <main className="relative flex w-full max-w-[1173px] flex-col items-stretch max-md:max-w-full">
         <Header onNavigate={handleNavigate} />
         <AboutSection />
