@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState } from "react";
 
 export const ProjectsSection: React.FC = () => {
   const projectImages = [
@@ -12,73 +12,86 @@ export const ProjectsSection: React.FC = () => {
   ];
 
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
-  const [isTitleVisible, setIsTitleVisible] = useState(false);
-
-  const extraBlocks = [1, 2];
-  const titleRef = useRef<HTMLHeadingElement>(null);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            setIsTitleVisible(true);
-            observer.unobserve(entry.target);
-          }
-        });
-      },
-      { threshold: 0.5 }
-    );
-
-    if (titleRef.current) observer.observe(titleRef.current);
-
-    return () => {
-      if (titleRef.current) observer.unobserve(titleRef.current);
-    };
-  }, []);
+  const [isChestOpen, setIsChestOpen] = useState(false);
 
   return (
-    <section
-      id="projetos"
-      className="bg-[rgba(140,61,44,1)] dark:bg-[#251D21] drop-shadow-[4px_4px_0_rgba(0,0,0,1)] flex w-full flex-col items-stretch mt-[127px] pb-[88px] px-[43px] border-[rgba(209,141,114,1)] dark:border-[#3D3232] border-solid border-[10px] rounded-[20px] max-md:max-w-full max-md:mr-[3px] max-md:mt-10 max-md:px-5"
-    >
-      <header
-        className="bg-[rgba(140,61,44,1)] dark:bg-[#251D21] drop-shadow-[4px_4px_0_rgba(0,0,0,1)] z-10 flex mt-[-34px] flex-col items-stretch text-xl text-[rgba(235,227,172,1)] font-['Press_Start_2P'] whitespace-nowrap text-center leading-none justify-center px-[70px] py-[27px] rounded-[20px] border-[rgba(209,141,114,1)] dark:border-[#3D3232] border-solid border-[5px] max-md:px-5"
+    <section id="projetos" className="flex flex-col items-center mt-20 px-4 sm:px-10">
+      {/* Baú + fada */}
+      <div className="relative flex flex-col items-center text-center w-full">
+  <div className="flex flex-col items-center gap-6 w-full">
+    {/* Fada + fala */}
+    <div className="flex items-start gap-3 mb-6">
+      <img
+        src="/imagens/fada.png"
+        alt="Fadinha"
+        className="w-14 animate-bounce"
+      />
+      <div
+        className="px-4 py-3 bg-[#eaeaea] dark:bg-[#222] border-4 border-black dark:border-white 
+                   font-['Press_Start_2P'] text-xs text-black dark:text-white 
+                   max-w-[220px] leading-relaxed text-left
+                   drop-shadow-[4px_4px_0_rgba(0,0,0,1)] rounded-sm"
       >
-        <h2
-          ref={titleRef}
-          className={`drop-shadow-[4px_4px_0_rgba(0,0,0,1)] ${
-            isTitleVisible ? "tracking-in-expand-fwd" : ""
-          }`}
-        >
-          Projetos
-        </h2>
-      </header>
-
-      <div className="mt-[37px] max-md:max-w-full max-md:mr-0.5">
-        <div className="grid grid-cols-3 gap-5 max-md:grid-cols-1">
-          {projectImages.map((src, index) => (
-            <div
-              key={index}
-              className="w-full border-2 border-[rgba(209,141,114,1)] dark:border-[#3D3232] drop-shadow-[4px_4px_0_rgba(0,0,0,1)] cursor-pointer rounded-[12px]"
-            >
-              <img
-                src={src}
-                alt={`Project ${index + 1}`}
-                className="aspect-[1.74] object-top object-cover w-full rounded-[12px] hover:scale-105 transition-transform"
-                onClick={() => setSelectedImage(src)}
-              />
-            </div>
-          ))}
-
-          {extraBlocks.map((_, index) => (
-            <div
-              key={`extra-${index}`}
-              className="w-full aspect-[1.74] bg-[#C1683D] dark:bg-[#3D3232] border-2 border-[rgba(209,141,114,1)] dark:border-[#3D3232] drop-shadow-[4px_4px_0_rgba(0,0,0,1)] rounded-[12px] hidden md:block"
-            />
-          ))}
-        </div>
+        {!isChestOpen
+          ? "HEY, LISTEN! Clique no baú para conferir os projetos."
+          : "Esses são alguns projetos que o Yúri já fez"}
       </div>
+    </div>
+
+    {/* Baú */}
+    <img
+      src={isChestOpen ? "/imagens/bau-aberto.png" : "/imagens/bau-fechado.png"}
+      alt={isChestOpen ? "Baú aberto" : "Baú fechado"}
+      className="w-56 cursor-pointer hover:scale-105 transition-transform"
+      onClick={() => setIsChestOpen((prev) => !prev)}
+    />
+  </div>
+</div>
+
+
+      {/* Conteúdo revelado só quando o baú abre */}
+      {isChestOpen && (
+        <div
+          className="bg-[rgba(140,61,44,1)] dark:bg-[#251D21] 
+                     drop-shadow-[4px_4px_0_rgba(0,0,0,1)] 
+                     w-full flex flex-col items-stretch mt-4 pb-10 px-4 sm:px-10 
+                     border-[rgba(209,141,114,1)] dark:border-[#3D3232] 
+                     border-solid border-[10px] rounded-[20px] 
+                     animate-fade-in-up"
+        >
+          <header
+            className="bg-[rgba(140,61,44,1)] dark:bg-[#251D21] 
+                       drop-shadow-[4px_4px_0_rgba(0,0,0,1)] 
+                       z-10 flex -mt-8 flex-col items-stretch 
+                       text-lg sm:text-xl text-[rgba(235,227,172,1)] font-['Press_Start_2P'] 
+                       text-center leading-none justify-center 
+                       px-4 sm:px-10 py-4 sm:py-6 rounded-[20px] 
+                       border-[rgba(209,141,114,1)] dark:border-[#3D3232] 
+                       border-solid border-[5px]"
+          >
+            <h2>Projetos</h2>
+          </header>
+
+          <div
+            className={`grid grid-cols-1 sm:grid-cols-3 gap-5 mt-5`}
+          >
+            {projectImages.map((src, index) => (
+              <div
+                key={index}
+                className="w-full border-2 border-[rgba(209,141,114,1)] dark:border-[#3D3232] drop-shadow-[4px_4px_0_rgba(0,0,0,1)] cursor-pointer rounded-[12px] animate-fade-in-up"
+                style={{ animationDelay: `${index * 0.1}s` }}
+              >
+                <img
+                  src={src}
+                  alt={`Project ${index + 1}`}
+                  className="aspect-[1.74] object-top object-cover w-full rounded-[12px] hover:scale-105 transition-transform"
+                  onClick={() => setSelectedImage(src)}
+                />
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
 
       {/* Modal */}
       {selectedImage && (
