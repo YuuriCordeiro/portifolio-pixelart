@@ -19,7 +19,7 @@ export const Header: React.FC<HeaderProps> = ({ onNavigate }) => {
       {/* Header com nome menor e sombra pixelada */}
       <div
         className="
-          bg-[rgba(12,71,0,1)] dark:bg-[#34251D]
+          bg-[#81482A] dark:bg-[#34251D]
           flex flex-col max-md:flex-row items-center max-md:justify-start
           text-[48px] text-[rgba(235,227,172,1)] font-heading text-center leading-none justify-center
           px-[40px] py-6
@@ -44,7 +44,7 @@ export const Header: React.FC<HeaderProps> = ({ onNavigate }) => {
       {/* Nav desktop */}
       <nav
         className="
-          hidden md:flex dark:bg-[#34251D] bg-[rgba(12,71,0,1)]
+          hidden md:flex dark:bg-[#34251D] bg-[#81482A]
           self-center flex w-[900px] max-w-full flex-col items-center
           text-lg text-[rgba(235,227,172,1)] font-heading whitespace-nowrap text-center
           leading-[48px] justify-center mt-6 px-6 py-3
