@@ -62,7 +62,7 @@ export const Header: React.FC<HeaderProps> = ({ onNavigate }) => {
 
       {/* Menu mobile */}
       {menuOpen && (
-        <div className="md:hidden flex flex-col dark:bg-[#34251D] bg-[rgba(12,71,0,1)] mt-2 px-6 py-4 rounded-[20px] dark:border-[#64411D] border-[rgba(213,167,54,1)] border-solid border-4 drop-shadow-[4px_4px_0_rgba(0,0,0,1)] space-y-2">
+        <div className="md:hidden flex flex-col dark:bg-[#34251D] bg-[#81482A] mt-2 px-6 py-4 rounded-[20px] dark:border-[#64411D] border-[rgba(213,167,54,1)] border-solid border-4 drop-shadow-[4px_4px_0_rgba(0,0,0,1)] space-y-2">
           <button className="tracking-in-expand-fwd w-full text-left text-[rgba(235,227,172,1)] hover:text-[rgba(213,167,54,1)] transition-colors font-heading drop-shadow-[2px_2px_0_rgba(0,0,0,1)]" onClick={() => handleNavClick('sobre')}>Sobre</button>
           <button className="tracking-in-expand-fwd w-full text-left text-[rgba(235,227,172,1)] hover:text-[rgba(213,167,54,1)] transition-colors font-heading drop-shadow-[2px_2px_0_rgba(0,0,0,1)]" onClick={() => handleNavClick('projetos')}>Projetos</button>
           <button className="tracking-in-expand-fwd w-full text-left text-[rgba(235,227,172,1)] hover:text-[rgba(213,167,54,1)] transition-colors font-heading drop-shadow-[2px_2px_0_rgba(0,0,0,1)]" onClick={() => handleNavClick('skills')}>Skills</button>
