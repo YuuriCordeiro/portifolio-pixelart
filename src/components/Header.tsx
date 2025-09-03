@@ -34,11 +34,37 @@ export const Header: React.FC<HeaderProps> = ({ onNavigate }) => {
 
         {/* Botão hambúrguer para mobile */}
         <button
-          className="ml-auto block max-md:block md:hidden text-[rgba(235,227,172,1)] font-heading text-3xl px-4 py-2 drop-shadow-[2px_2px_0_rgba(0,0,0,1)] focus:outline-none"
-          onClick={() => setMenuOpen(!menuOpen)}
-        >
-          ☰
-        </button>
+  className="ml-auto block max-md:block md:hidden px-4 py-2 focus:outline-none"
+  onClick={() => setMenuOpen(!menuOpen)}
+>
+  <div className="relative w-8 h-8 flex items-center justify-center">
+    {/* Linha 1 */}
+    <span
+      className={`absolute h-[3px] w-7 bg-[rgba(235,227,172,1)] 
+      drop-shadow-[2px_2px_0_rgba(0,0,0,1)] rounded 
+      transition-all duration-300 ease-in-out origin-center
+      ${menuOpen ? 'rotate-45 translate-y-0' : '-translate-y-2'}`}
+    ></span>
+
+    {/* Linha 2 */}
+    <span
+      className={`absolute h-[3px] w-7 bg-[rgba(235,227,172,1)] 
+      drop-shadow-[2px_2px_0_rgba(0,0,0,1)] rounded 
+      transition-all duration-300 ease-in-out origin-center
+      ${menuOpen ? 'opacity-0' : 'opacity-100'}`}
+    ></span>
+
+    {/* Linha 3 */}
+    <span
+      className={`absolute h-[3px] w-7 bg-[rgba(235,227,172,1)] 
+      drop-shadow-[2px_2px_0_rgba(0,0,0,1)] rounded 
+      transition-all duration-300 ease-in-out origin-center
+      ${menuOpen ? '-rotate-45 translate-y-0' : 'translate-y-2'}`}
+    ></span>
+  </div>
+</button>
+
+
       </div>
 
       {/* Nav desktop */}
